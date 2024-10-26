@@ -5,11 +5,21 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import jakarta.annotation.Generated;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+@Entity
+@Table(name="productos")
 public class Productos {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idproducto;
 	private String nomprod;
 	private double precio;
@@ -20,6 +30,9 @@ public class Productos {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date fechaven;
+	
+	@ManyToOne
+	private Usuario usuario;
 
 	// contructor vacio
 	public Productos() {
@@ -38,7 +51,10 @@ public class Productos {
 		this.codbarras = codbarras;
 		this.nrolote = nrolote;
 		this.fechaven = fechaven;
+		
 	}
+
+	
 
 	// getters and setters
 	public int getIdproducto() {
@@ -104,7 +120,15 @@ public class Productos {
 	public void setFechaven(Date fechaven) {
 		this.fechaven = fechaven;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Productos [idproducto=" + idproducto + ", nomprod=" + nomprod + ", precio=" + precio + ", cantidad="

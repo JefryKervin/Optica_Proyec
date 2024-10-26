@@ -1,15 +1,26 @@
 package com.optica.crud.modelo;
 
 import java.util.Date;
-
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+
 //atritbutos
+@Entity 
+@Table(name="usuario")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idusuario;
 	private String nombre;
 	private String apellido;
@@ -22,6 +33,16 @@ public class Usuario {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date fechanacimc;
 
+	///
+	@OneToMany(mappedBy = "usuario")
+	private List<Productos> productos;
+	
+	
+	//
+	@OneToMany(mappedBy = "usuario")
+	private List<Orden> ordenes;
+	
+	
 	// constructor vacio
 	public Usuario() {
 		// super();
@@ -113,6 +134,16 @@ public class Usuario {
 
 	public void setFechanacimc(Date fechanacimc) {
 		this.fechanacimc = fechanacimc;
+	}
+	
+	
+
+	public List<Productos> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Productos> productos) {
+		this.productos = productos;
 	}
 
 	@Override
