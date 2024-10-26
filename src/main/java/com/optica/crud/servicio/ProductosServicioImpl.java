@@ -1,11 +1,12 @@
 package com.optica.crud.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.optica.crud.modelo.Productos;
+import com.optica.crud.model.Productos;
 import com.optica.crud.repositorio.ProductosRepository;
 
 
@@ -38,6 +39,12 @@ public class ProductosServicioImpl implements ProductosServicio{
 		//// metodo eliminar
 		productosRepository.deleteById(id);
 	}//fin del metodo
+
+	@Override
+	public List<Productos> findAll() {
+		// metodo listar
+		return productosRepository.findAll();
+	}
 
 	
 		

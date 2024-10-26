@@ -1,4 +1,4 @@
-package com.optica.crud.modelo;
+package com.optica.crud.model;
 
 import java.util.Date;
 import java.util.List;
